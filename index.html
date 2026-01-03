@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Pastelería 🍰</title>
+<style>
+body{
+    font-family: Arial;
+    background:#fff3f8;
+}
+.container{
+    width: 420px;
+    margin:auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px #ddd;
+}
+input, select, button{
+    width:100%;
+    margin:6px 0;
+    padding:8px;
+}
+button{
+    background:#ff6fa1;
+    color:white;
+    border:none;
+    border-radius:5px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h2>🧁 Nuevo Pedido</h2>
+
+<input id="cliente" placeholder="Nombre del cliente">
+<select id="estado">
+  <option value="recepcionado">Recepcionado</option>
+  <option value="despachado">Despachado</option>
+</select>
+
+<input id="basico" type="number" placeholder="Pastel básico">
+<input id="mediano" type="number" placeholder="Pastel mediano">
+<input id="grande" type="number" placeholder="Pastel grande">
+
+<button onclick="guardar()">Guardar pedido</button>
+<pre id="res"></pre>
+</div>
+
+<script>
+function guardar(){
+fetch("api.php",{
+    method:"POST",
+    body:JSON.stringify({
+        cliente: cliente.value,
+        estado: estado.value,
+        pastel_basico: basico.value,
+        pastel_mediano: mediano.value,
+        pastel_grande: grande.value
+    })
+})
+.then(r=>r.json())
+.then(d=>res.innerText=JSON.stringify(d,null,2))
+}
+</script>
+
+</body>
+</html>
